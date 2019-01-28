@@ -1,10 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import sys
+
+if sys.version_info[0] < 3:
+    print("Sorry, but Clonenames requires Python 3. Please install it to play!")
+    print("Exiting now...")
+    sys.exit()
+
 from flask import Flask, render_template, request, redirect, url_for
 from flask_socketio import SocketIO, join_room
 
 import random
+
 
 import clonenames
 
