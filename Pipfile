@@ -4,13 +4,14 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
-flask-socketio = "*"
-eventlet = "*"
+flask = "==1.0.2"
+flask-socketio = "==3.2.1"
+eventlet = "==0.24.1"
 
 [dev-packages]
 "flake8" = "*"
 mypy = "*"
+ipython = "*"
 
 [requires]
 python_version = "3.7"
