@@ -6,7 +6,8 @@ import random
 wordlists = {
     u'Codenames': u'codenames',
     u'Cards Against Humanity': u'cardsagainsthumanity',
-    u'Pokemon (Generation 1)': u'pokemon_gen1'}
+    u'Pokemon (Generation 1)': u'pokemon_gen1',
+    u'__builtins__': u'builtin_functions'}
 
 
 class Board(object):
