@@ -1,0 +1,49 @@
+.btn-assassin {
+    color: #ffffff;
+
+    background: repeating-linear-gradient(
+        45deg,
+        #343a40,
+        #343a40 10px,
+        #dc3545 10px,
+        #dc3545 20px
+        );
+
+    border-color: #343a40;
+}
+
+.btn-bystander {
+    color: #ffffff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-red-team {
+    color: #ffffff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-blue-team {
+    color: #ffffff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-green-team {
+    color: #ffffff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-yellow-team {
+    color: #000000;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.host.btn-light:not(:disabled):not(.disabled).active, .host.btn-light:not(:disabled):not(.disabled):active, .host.show>.btn-light.dropdown-toggle {
+    color: #ffffff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}

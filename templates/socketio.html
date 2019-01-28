@@ -1,0 +1,24 @@
+<script type="text/javascript" charset="utf-8">
+    {% if not show_input %}
+        var socket = io('http://' + document.domain + ':' + location.port);
+
+        socket.emit('join', {
+            'room': '{{ room }}'});
+    {% endif %}
+
+    {% if host %}
+        $('button').click(function(event) {
+            socket.emit('clicked', {
+                'host': true,
+                'room': '{{ room }}',
+                'id': event.target.id});
+        });
+
+    {% else %}
+        socket.on('revealed', function(message) {
+            $(message['id']).addClass(message['class']);
+        });
+
+    {% endif %}
+</script>
+

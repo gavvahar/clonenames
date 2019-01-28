@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Clonenames - Python Codenames</title>
+
+    {% include "scripts.html" %}
+
+  </head>
+  <body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            {% include "header.html" %}
+            <div class="jumbotron card card-block">
+                <h2>
+                    Let's Play!
+                </h2>
+                <hr>
+                <h4>
+                    Game Settings
+                </h4>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="number">Number of Teams:</label>
+                        <input name="number" type="number" min="2" class="form-control" placeholder="2" value="2" required>
+                        <small class="form-text text-muted">Must be between 2 and 4</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="size">Board Size:</label>
+                        <input name="size" type="number" min="25" max="100" class="form-control" placeholder="25" value="25" required>
+                        <small class="form-text text-muted">Must be between 25 and 100</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="wordlist">Words List:</label>
+                        <select name="words">
+                            {%- for option in words.keys() %}
+                                <option value="{{ words[option] }}">{{ option }}</option>
+                            {%- endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Get Started!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
