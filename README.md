@@ -62,7 +62,7 @@ Try to get your team to guess all of the words in your color, without guessing a
 * **Brendan Cazier** - *Initial work*- [cazier](https://github.com/cazier/)
 
 ## License
-This project is licenesed under the GPLv3 License - See [LICENSE](LICENSE) for more details.
+This project is licensed under the GPLv3 License - See [LICENSE](LICENSE) for more details.
 
 ## Acknowledgements
 * Obviously Czech Games for the original game idea
