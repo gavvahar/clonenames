@@ -13,7 +13,6 @@ from flask_socketio import SocketIO, join_room
 
 import random
 
-
 import clonenames
 
 app = Flask(__name__)
