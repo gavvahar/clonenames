@@ -1,0 +1,4 @@
+- [ ] Implement the statistics page
+- [ ] Starting team color
+- [ ] AI!
+- [ ] Fill out Python functions wordlist
