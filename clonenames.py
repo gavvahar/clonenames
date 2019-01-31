@@ -20,9 +20,14 @@ class Board(object):
     def load_settings(self, teams: int = 2, size: int = 25) -> None:
         self.check_size(size)
 
+        if self.size > len(self.source):
+            return False
+
         self.teams = teams
 
         self.load_words()
+
+        return True
 
     def check_size(self, size: int) -> None:
         MIN = 25

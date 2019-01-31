@@ -24,6 +24,14 @@
                 <h4>
                     Game Settings
                 </h4>
+                {% if alert %}
+                    {% if alert == 'SizeAlert' %}
+                        <div class ="alert alert-danger" role="alert">
+                            The word list you selected must be played on a smaller game board... Sorry!
+                        </div>
+                    {% endif %}
+                {% endif %}
+
                 <form method="POST">
                     <div class="form-group">
                         <label for="number">Number of Teams:</label>

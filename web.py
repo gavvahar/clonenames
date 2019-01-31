@@ -30,15 +30,23 @@ def home_page():
 def start_page():
     if request.method == u'POST':
         game = clonenames.Board(request.form.get(u'words'))
-        game.load_settings(
+
+        success = game.load_settings(
             teams = int(request.form.get(u'number')),
             size = int(request.form.get(u'size')))
 
-        room = generate_room_code()
+        if success:
+            room = generate_room_code()
 
-        games[room] = game
+            games[room] = game
 
-        return redirect(url_for(u'game_page', room = room))
+            return redirect(url_for(u'game_page', room = room))
+
+        else:
+            return render_template(
+                u'start.html',
+                words = clonenames.wordlists,
+                alert = u'SizeAlert')
 
     elif request.method == u'GET':
         return render_template(u'start.html', words = clonenames.wordlists)
