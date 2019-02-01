@@ -40,7 +40,7 @@ def start_page():
 
             games[room] = game
 
-            return redirect(url_for(u'game_page', room = room))
+            return redirect(url_for(u'game_page', room = room, first = game.START))
 
         else:
             return render_template(
@@ -62,7 +62,8 @@ def game_page():
             show_code = True,
             room = room,
             host = True,
-            words = games[room].table())
+            words = games[room].table(),
+            start = request.args.get(u'first'))
 
     else:
         try:

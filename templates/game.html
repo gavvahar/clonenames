@@ -1,83 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Clonenames - Python Codenames</title>
+        <title>Clonenames - Python Codenames</title>
 
-    {% include "scripts.html" %}
+        {% include "scripts.html" %}
 
-  </head>
-  <body>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            {% include "header.html" %}
-            <div class="jumbotron card card-block">
-                <h2>
-                    Let's Play!
-                </h2>
-                <hr>
-                {% if show_input %}
-                <h4>
-                    Room Code
-                </h4>
-                {% if show_room_alert %}
-                <div class ="alert alert-danger" role="alert">
-                    The room code you entered was not correct!
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    {% include "header.html" %}
+                    <div class="jumbotron card card-block">
+                        <h2>
+                            Let's Play!
+                        </h2>
+                        <hr>
+                        {% if show_input %}
+                            <h4>
+                                Room Code
+                            </h4>
+                            {% if show_room_alert %}
+                                <div class ="alert alert-danger" role="alert">
+                                    The room code you entered was not correct!
+                                </div>
+                            {% endif %}
+                            <form method="POST">
+                                <div class="form-group">
+                                    <input name="room" type="text" class="form-control" style="text-transform:uppercase" placeholder="PYSPY" maxlength="5" required autocomplete="off">
+                                    <small class="form-text text-muted">Must be 5 characters!</small>
+                                </div>
+                                <a class="btn-group-toggle" data-toggle="buttons">
+                                    <label class="host btn btn-light">
+                                        <input name="host" type="checkbox">Host</input>
+                                    </label>
+                                </a>
+                                <button type="submit" class="btn btn-success">Get Started!</button>
+                                </div>
+                            </form>
+                        {% else %}
+                            {% if host %}
+                                <div class ="alert {{ start.lower() }}-start" role="alert">
+                                    {{ start.title() }} Host, you go first!
+                                </div>
+                            {% endif %}
+                            <table class="table">
+                                {%- for row in words %}
+                                    <tr>
+                                        {% for column in row %}
+                                            {% if host %}
+                                                <td>
+                                                    <button class="btn btn-block {{ column.team }}" id="{{ column.number }}">
+                                                        {{ column.word }}
+                                                    </button>
+                                                </td>
+                                            {% else %}
+                                                {% if column.shown %}
+                                                <td>
+                                                    <button class="btn btn-block {{ column.team }}" id="{{ column.number }}">
+                                                        {{ column.word }}
+                                                    </button>
+                                                </td>
+                                                {% else %}
+                                                    <td>
+                                                        <button class="btn btn-block" id="{{ column.number }}">
+                                                            {{ column.word }}
+                                                        </button>
+                                                    </td>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tr>
+                                {%- endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
                 </div>
-                {% endif %}
-                <form method="POST">
-                    <div class="form-group">
-                        <input name="room" type="text" class="form-control" style="text-transform:uppercase" placeholder="PYSPY" maxlength="5" required autocomplete="off">
-                        <small class="form-text text-muted">Must be 5 characters!</small>
-                    </div>
-                    <a class="btn-group-toggle" data-toggle="buttons">
-                        <label class="host btn btn-light">
-                            <input name="host" type="checkbox">Host</input>
-                        </label>
-                    </a>
-                    <button type="submit" class="btn btn-success">Get Started!</button>
-                    </div>
-                </form>
-                {% else %}
-                <table class="table">
-                    {%- for row in words %}
-                        <tr>
-                            {% for column in row %}
-                                {% if host %}
-                                    <td>
-                                        <button class="btn btn-block {{ column.team }}" id="{{ column.number }}">
-                                            {{ column.word }}
-                                        </button>
-                                    </td>
-                                {% else %}
-                                    {% if column.shown %}
-                                    <td>
-                                        <button class="btn btn-block {{ column.team }}" id="{{ column.number }}">
-                                            {{ column.word }}
-                                        </button>
-                                    </td>
-                                    {% else %}
-                                        <td>
-                                            <button class="btn btn-block" id="{{ column.number }}">
-                                                {{ column.word }}
-                                            </button>
-                                        </td>
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
-                        </tr>
-                    {%- endfor %}
-                </table>
-                {% endif %}
             </div>
         </div>
-    </div>
-</div>
-{% include "socketio.html" %}
-</body>
+        {% include "socketio.html" %}
+    </body>
 </html>

@@ -60,6 +60,7 @@ class Board(object):
         bystanders_cards = self.size - first_team_cards - (other_team_cards * (self.teams - 1)) - 1
 
         self.FIRST = self.COLORS.pop()
+        self.START = self.FIRST[4:-5]
 
         for _ in range(first_team_cards):
             self.words.append(Card(source.pop(0), self.FIRST))
@@ -77,6 +78,7 @@ class Board(object):
         random.shuffle(self.words)
 
         self.legend = {j.number: i for i, j in enumerate(self.words)}
+
 
     def table(self) -> list:
         return [self.words[i: i + self.length] for i in range(0, self.size, self.length)]
