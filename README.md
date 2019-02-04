@@ -13,7 +13,7 @@ Unlike the original game, Clonenames allows up to 4 teams, and game boards with 
  
 And it's very easy to add any other word lists. They're just new-line delineated files.
 
-[![](screenshot.png)](#)
+[![](screenshot.png)](/#)
 
 ## Getting Started
 ### Prerequisites/Required Libraries
@@ -66,4 +66,4 @@ This project is licensed under the GPLv3 License - See [LICENSE](LICENSE) for mo
 
 ## Acknowledgements
 * Obviously Czech Games for the original game idea
-* u/professorfart7933 for the suggesting the name "Clonenames"!
+* u/professorfart7933 for suggesting the name "Clonenames"!
