@@ -13,7 +13,7 @@ Unlike the original game, Clonenames allows up to 4 teams, and game boards with 
  
 And it's very easy to add any other word lists. They're just new-line delineated files.
 
-[![](screenshot.png)](/#)
+[![](screenshot.png)]()
 
 ## Getting Started
 ### Prerequisites/Required Libraries
