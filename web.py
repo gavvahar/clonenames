@@ -108,7 +108,8 @@ def handle_host_click(json):
         u'text': u'Host clicked on {word}'.format(
             word = games[json[u'room']].get(json['id'])[u'word']),
         u'id': u'#{id}'.format(id = json[u'id']),
-        u'class': games[json[u'room']].get(json['id'])[u'team']}, room = json['room'])
+        u'class': u'btn-{team}'.format(
+            team = games[json[u'room']].get(json['id'])[u'team'])}, room = json['room'])
 
 
 @socketio.on(u'ended_turn')
