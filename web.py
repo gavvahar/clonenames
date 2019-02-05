@@ -46,7 +46,7 @@ def start_page():
             return render_template(
                 u'start.html',
                 words = clonenames.wordlists,
-                alert = u'The word list you selected must be played on a smaller game board... Sorry!')
+                alert = u'The word list selected must be played on a smaller game board... Sorry!')
 
     elif request.method == u'GET':
         return render_template(u'start.html', words = clonenames.wordlists)
@@ -104,12 +104,12 @@ def join(data):
 
 @socketio.on(u'clicked')
 def handle_host_click(json):
-
     socketio.emit(u'revealed', {
         u'text': u'Host clicked on {word}'.format(
             word = games[json[u'room']].get(json['id'])[u'word']),
         u'id': u'#{id}'.format(id = json[u'id']),
         u'class': games[json[u'room']].get(json['id'])[u'team']}, room = json['room'])
+
 
 @socketio.on(u'ended_turn')
 def handle_end_turn(json):

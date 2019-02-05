@@ -17,7 +17,7 @@ class Board(object):
         with open(u'wordlists/{wordlist}'.format(wordlist = wordlist), u'r') as text_file:
             self.source = [line for line in text_file.read().split(u'\n') if line != u'']
 
-    def load_settings(self, teams: int = 2, size: int = 25) -> None:
+    def load_settings(self, teams: int = 2, size: int = 25) -> bool:
         self.check_size(size)
 
         if self.size > len(self.source):
