@@ -24,11 +24,6 @@
                             <h4>
                                 Room Code
                             </h4>
-                            {% if show_room_alert %}
-                                <div class ="alert alert-danger" role="alert">
-                                    The room code you entered was not correct!
-                                </div>
-                            {% endif %}
                             <form method="POST">
                                 <div class="form-group">
                                     <input name="room" type="text" class="form-control" style="text-transform:uppercase" placeholder="PYSPY" maxlength="5" required autocomplete="off">
@@ -44,9 +39,12 @@
                             </form>
                         {% else %}
                             {% if host %}
-                                <div class ="alert {{ start.lower() }}-start" role="alert">
-                                    {{ start.title() }} Host, you go first!
+                            <h4>
+                                <div id="turn-alert" class ="alert {{ start }}-start alert-start" role="alert">
+                                    It is currently the <a id="turn-text" style="text-transform: capitalize;">{{ start }}</a> Team's turn! 
+                                <button id="turn-button" class="btn btn-{{ start }} float-right" type="button">End Turn</button>
                                 </div>
+                            </h4>
                             {% endif %}
                             <table class="table">
                                 {%- for row in words %}
@@ -54,24 +52,16 @@
                                         {% for column in row %}
                                             {% if host %}
                                                 <td>
-                                                    <button class="btn btn-block {{ column.team }}" id="{{ column.number }}">
+                                                    <button class="btn btn-block btn-{{ column.team }} {% if column.shown %}disabled{% endif %}" id="{{ column.number }}">
                                                         {{ column.word }}
                                                     </button>
                                                 </td>
                                             {% else %}
-                                                {% if column.shown %}
                                                 <td>
-                                                    <button class="btn btn-block {{ column.team }}" id="{{ column.number }}">
+                                                    <button class="btn btn-block {% if column.shown %} btn-{{ column.team }} {% endif %}" id="{{ column.number }}">
                                                         {{ column.word }}
                                                     </button>
                                                 </td>
-                                                {% else %}
-                                                    <td>
-                                                        <button class="btn btn-block" id="{{ column.number }}">
-                                                            {{ column.word }}
-                                                        </button>
-                                                    </td>
-                                                {% endif %}
                                             {% endif %}
                                         {% endfor %}
                                     </tr>

@@ -40,13 +40,13 @@ def start_page():
 
             games[room] = game
 
-            return redirect(url_for(u'game_page', room = room, first = game.START))
+            return redirect(url_for(u'game_page', room = room))
 
         else:
             return render_template(
                 u'start.html',
                 words = clonenames.wordlists,
-                alert = u'SizeAlert')
+                alert = u'The word list you selected must be played on a smaller game board... Sorry!')
 
     elif request.method == u'GET':
         return render_template(u'start.html', words = clonenames.wordlists)
@@ -59,11 +59,10 @@ def game_page():
         return render_template(
             u'game.html',
             show_input = False,
-            show_code = True,
             room = room,
             host = True,
             words = games[room].table(),
-            start = request.args.get(u'first'))
+            start = games[room].order[0])
 
     else:
         try:
@@ -75,21 +74,19 @@ def game_page():
             elif request.method == u'POST':
                 room = request.form.get(u'room', False).upper()
                 if check_room_code(room):
-                    game = games[room]
-
                     return render_template(
                         u'game.html',
                         show_input = False,
-                        show_code = True,
                         room = room,
                         host = request.form.get(u'host', False) == u'on',
-                        words = game.table())
+                        words = games[room].table(),
+                        start = games[room].order[0])
 
                 else:
                     return render_template(
                         u'game.html',
                         show_input = True,
-                        show_room_alert = True)
+                        alert = u'The room code you entered does not exist. Please try again!')
 
         except AttributeError:
             return redirect(url_for(u'home_page'))
@@ -107,13 +104,24 @@ def join(data):
 
 @socketio.on(u'clicked')
 def handle_host_click(json):
-    room_code = json[u'room']
 
     socketio.emit(u'revealed', {
         u'text': u'Host clicked on {word}'.format(
-            word = games[room_code].get(json['id'])[u'word']),
+            word = games[json[u'room']].get(json['id'])[u'word']),
         u'id': u'#{id}'.format(id = json[u'id']),
-        u'class': games[room_code].get(json['id'])[u'team']}, room = json['room'])
+        u'class': games[json[u'room']].get(json['id'])[u'team']}, room = json['room'])
+
+@socketio.on(u'ended_turn')
+def handle_end_turn(json):
+    team = games[json[u'room']].advance_turn()
+
+    alert = u'alert {team}-start alert-start'.format(team = team)
+    button = u'btn btn-{team} float-right'.format(team = team)
+
+    socketio.emit(u'change_turn', {
+        u'alert': alert,
+        u'text': team,
+        u'button': button}, room = json[u'room'])
 
 
 def generate_room_code():

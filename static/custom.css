@@ -18,25 +18,25 @@
     border-color: #6c757d;
 }
 
-.btn-red-team {
+.btn-red {
     color: #ffffff;
     background-color: #dc3545;
     border-color: #dc3545;
 }
 
-.btn-blue-team {
+.btn-blue {
     color: #ffffff;
     background-color: #007bff;
     border-color: #007bff;
 }
 
-.btn-green-team {
+.btn-green {
     color: #ffffff;
     background-color: #28a745;
     border-color: #28a745;
 }
 
-.btn-yellow-team {
+.btn-yellow {
     color: #000000;
     background-color: #ffc107;
     border-color: #ffc107;
@@ -70,4 +70,18 @@
     color: #ffffff;
     background-color: #6c757d;
     border-color: #6c757d;
+}
+
+.alert-start {
+    padding: 12px 12px;
+    height: 64px;
+    line-height: 64px;
+}
+
+.flask-alert {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    width: auto;
+    z-index: 999;
 }

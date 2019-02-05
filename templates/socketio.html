@@ -8,10 +8,28 @@
 
     {% if host %}
         $('button').click(function(event) {
-            socket.emit('clicked', {
-                'host': true,
-                'room': '{{ room }}',
-                'id': event.target.id});
+            if (this.id == 'turn-button') {
+                socket.emit('ended_turn', {
+                    'room': '{{ room }}'
+                });
+            }
+            else {
+                $('#' + this.id).addClass('disabled');
+
+                socket.emit('clicked', {
+                    'host': true,
+                    'room': '{{ room }}',
+                    'id': event.target.id});
+            }
+        });
+
+        socket.on('change_turn', function(message) {
+            $('#turn-alert').removeClass();
+            $('#turn-button').removeClass();
+
+            $('#turn-text').text(message['text']);
+            $('#turn-alert').addClass(message['alert']);
+            $('#turn-button').addClass(message['button']);
         });
 
     {% else %}

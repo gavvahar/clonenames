@@ -48,7 +48,7 @@ class Board(object):
         self.length = int(self.size ** 0.5)
 
     def load_words(self) -> None:
-        self.COLORS = [u'btn-red-team', u'btn-blue-team', u'btn-green-team', u'btn-yellow-team']
+        self.COLORS = [u'red', u'blue', u'green', u'yellow']
         random.shuffle(self.COLORS)
 
         self.words: list = list()
@@ -60,31 +60,41 @@ class Board(object):
         bystanders_cards = self.size - first_team_cards - (other_team_cards * (self.teams - 1)) - 1
 
         self.FIRST = self.COLORS.pop()
-        self.START = self.FIRST[4:-5]
+
+        self.order = [self.FIRST]
+        self.turn = 0
 
         for _ in range(first_team_cards):
             self.words.append(Card(source.pop(0), self.FIRST))
 
         for team in range(self.teams - 1):
             color = self.COLORS.pop()
+            self.order.append(color)
             for _ in range(other_team_cards):
                 self.words.append(Card(source.pop(0), color))
 
         for _ in range(bystanders_cards):
-            self.words.append(Card(source.pop(0), u'btn-bystander'))
+            self.words.append(Card(source.pop(0), u'bystander'))
 
-        self.words.append(Card(source.pop(0), u'btn-assassin'))
+        self.words.append(Card(source.pop(0), u'assassin'))
 
         random.shuffle(self.words)
 
         self.legend = {j.number: i for i, j in enumerate(self.words)}
-
 
     def table(self) -> list:
         return [self.words[i: i + self.length] for i in range(0, self.size, self.length)]
 
     def get(self, entry):
         return self.words[self.legend[int(entry)]].get()
+
+    def advance_turn(self):
+        if self.turn == 1200:
+            self.turn = 1
+        else:
+            self.turn += 1
+
+        return self.order[self.turn % self.teams]
 
     # def statistics(self):
     #     words = [pack for pack, file in wordlists.items() if file == self.wordlist][0]
