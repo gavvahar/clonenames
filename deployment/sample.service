@@ -1,0 +1,12 @@
+[Unit]
+Description=Deployment of an eventlet service running a flask-socketio server.
+
+[Service]
+User=users_name
+Group=www-data
+WorkingDirectory=/home/users_name/clonenames
+Environment="PATH=/home/users_name/clonenames/venv/bin"
+ExecStart=/home/users_name/clonenames/venv/bin/python web.py
+
+[Install]
+WantedBy=multi-user.target
