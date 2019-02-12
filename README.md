@@ -46,7 +46,7 @@ python web.py
 Open a web browser to [127.0.0.1:5000](127.0.0.1:5000) and you can start a game!
 
 ## Deployment
-Please refer to [DEPLOYMENT](deployment/deployment.md) for an (extremely) rough intro on how to deploy this on a webserver.
+Please refer to [DEPLOYMENT](deployment/DEPLOYMENT.md) for an (extremely) rough intro on how to deploy this on a webserver.
 
 ## Gameplay
 The rules are very simple. There needs to be one Host and at least one Player for each team. The Host can see which words are theirs based off of color. Then try to get your players to guess your words (and your words only!) with a single clue, and a number of words:
