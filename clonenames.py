@@ -52,6 +52,7 @@ class Board(object):
         random.shuffle(self.COLORS)
 
         self.words: list = list()
+        self.remnants: dict = {'assassin': 1}
 
         source = list(enumerate(random.sample(self.source, self.size)))
 
@@ -67,14 +68,20 @@ class Board(object):
         for _ in range(first_team_cards):
             self.words.append(Card(source.pop(0), self.FIRST))
 
+        self.remnants[self.FIRST] = first_team_cards
+
         for team in range(self.teams - 1):
             color = self.COLORS.pop()
             self.order.append(color)
             for _ in range(other_team_cards):
                 self.words.append(Card(source.pop(0), color))
 
+            self.remnants[color] = other_team_cards
+
         for _ in range(bystanders_cards):
             self.words.append(Card(source.pop(0), u'bystander'))
+
+        self.remnants[u'bystander'] = bystanders_cards
 
         self.words.append(Card(source.pop(0), u'assassin'))
 
@@ -86,7 +93,13 @@ class Board(object):
         return [self.words[i: i + self.length] for i in range(0, self.size, self.length)]
 
     def get(self, entry):
-        return self.words[self.legend[int(entry)]].get()
+        response = self.words[self.legend[int(entry)]].get()
+
+        self.remnants[response[u'team']] -= 1
+
+        response[u'remnant'] = self.remnants[response[u'team']]
+
+        return response
 
     def advance_turn(self):
         if self.turn == 1200:

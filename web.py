@@ -62,7 +62,8 @@ def game_page():
             room = room,
             host = True,
             words = games[room].table(),
-            start = games[room].order[0])
+            start = games[room].order[0],
+            remnants = games[room].remnants)
 
     else:
         try:
@@ -80,7 +81,8 @@ def game_page():
                         room = room,
                         host = request.form.get(u'host', False) == u'on',
                         words = games[room].table(),
-                        start = games[room].order[0])
+                        start = games[room].order[0],
+                        remnants = games[room].remnants)
 
                 else:
                     return render_template(
@@ -104,12 +106,14 @@ def join(data):
 
 @socketio.on(u'clicked')
 def handle_host_click(json):
+    response = games[json[u'room']].get(json[u'id'])
     socketio.emit(u'revealed', {
         u'text': u'Host clicked on {word}'.format(
-            word = games[json[u'room']].get(json['id'])[u'word']),
+            word = response[u'word']),
         u'id': u'#{id}'.format(id = json[u'id']),
+        u'remnant': response[u'remnant'],
         u'class': u'btn-{team}'.format(
-            team = games[json[u'room']].get(json['id'])[u'team'])}, room = json['room'])
+            team = response[u'team'])}, room = json['room'])
 
 
 @socketio.on(u'ended_turn')

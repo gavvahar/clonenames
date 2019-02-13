@@ -67,6 +67,28 @@
                                     </tr>
                                 {%- endfor %}
                             </table>
+                            <hr>
+                            <p>
+                                <button class="btn btn-outline-dark remnant-button" data-toggle="collapse" type="button" data-target="#remaining" aria-expanded="false" aria-controls="remaining">
+                                    Click here to show remaining word count
+                                </button>
+                            </p>
+                            <div class="collapse" id="remaining">
+                                <div class="card card-body remnant-table">
+                                    <table class="table table-bordered table-sm" >
+                                        <tr>
+                                            {% for team in remnants.keys() %}
+                                                <th style="text-transform: capitalize;">{{ team }}</th>
+                                            {% endfor %}
+                                        </tr>
+                                        <tr>
+                                            {% for team in remnants.keys() %}
+                                                <td class="remnant-data" id="btn-{{ team }}">{{ remnants[team] }}</td>
+                                            {% endfor %}
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
                         {% endif %}
                     </div>
                 </div>

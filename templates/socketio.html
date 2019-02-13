@@ -20,6 +20,10 @@
                     'host': true,
                     'room': '{{ room }}',
                     'id': event.target.id});
+
+                socket.on('revealed', function(message) {
+                    $('#' + message['class']).text(message['remnant']);
+                });
             }
         });
 
@@ -35,6 +39,7 @@
     {% else %}
         socket.on('revealed', function(message) {
             $(message['id']).addClass(message['class']);
+            $('#' + message['class']).text(message['remnant']);
         });
 
     {% endif %}

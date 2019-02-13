@@ -85,3 +85,19 @@
     width: auto;
     z-index: 999;
 }
+
+.remnant-button {
+    text-align: center;
+    margin: auto;
+}
+
+.remnant-table {
+    table-layout: fixed;
+    width: 100%;
+    background-color: #e9ecef;
+    text-align: center;
+}
+
+.remnant-data {
+    width: 16.67%;
+}
