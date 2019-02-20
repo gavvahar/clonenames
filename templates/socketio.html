@@ -23,6 +23,7 @@
 
                 socket.on('revealed', function(message) {
                     $('#' + message['class']).text(message['remnant']);
+                    $(message['id']).addClass('disabled');
                 });
             }
         });
