@@ -14,7 +14,7 @@ class Board(object):
     """docstring for Board"""
     def __init__(self, wordlist: str = u'codenames') -> None:
         # self.wordlist = wordlist
-        with open(u'wordlists/{wordlist}'.format(wordlist = wordlist), u'r') as text_file:
+        with open(u'wordlists/{wordlist}'.format(wordlist=wordlist), u'r') as text_file:
             self.source = [line for line in text_file.read().split(u'\n') if line != u'']
 
     def load_settings(self, teams: int = 2, size: int = 25) -> bool:
@@ -48,8 +48,8 @@ class Board(object):
         self.length = int(self.size ** 0.5)
 
     def load_words(self) -> None:
-        from time import clock
-        random.seed(clock())
+        from time import perf_counter
+        random.seed(perf_counter())
 
         self.COLORS = [u'red', u'blue', u'green', u'yellow']
         random.shuffle(self.COLORS)
